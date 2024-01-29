@@ -1,6 +1,6 @@
 import java.util.Arrays;
-import java.util.Scanner;
 import java.util.List;
+import java.util.Scanner;
 
 public class AgendaApp {
     private Agenda agenda;
@@ -15,7 +15,7 @@ public class AgendaApp {
     }
 
     private void inicializarContatos() {
-        // Contatos iniciais
+        // Adicionando contatos iniciais
         agenda.adicionarContato(new Contato(1L, "Carlos", "Silva", Arrays.asList(new Telefone(1L, "11", "99999-9999"))));
         agenda.adicionarContato(new Contato(2L, "Maria", "Fernandes", Arrays.asList(new Telefone(2L, "21", "88888-8888"))));
         agenda.adicionarContato(new Contato(3L, "José", "Almeida", Arrays.asList(new Telefone(3L, "31", "77777-7777"))));
@@ -29,7 +29,8 @@ public class AgendaApp {
             System.out.println("2 - Remover Contato");
             System.out.println("3 - Editar Contato");
             System.out.println("4 - Listar Contatos");
-            System.out.println("5 - Sair");
+            System.out.println("5 - Buscar Contato por Nome");
+            System.out.println("6 - Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
             scanner.nextLine(); // Limpa o buffer do scanner
@@ -48,6 +49,9 @@ public class AgendaApp {
                     listarContatos();
                     break;
                 case 5:
+                    buscarContatoPorNome();
+                    break;
+                case 6:
                     executando = false;
                     break;
                 default:
@@ -58,51 +62,23 @@ public class AgendaApp {
     }
 
     private void adicionarContato() {
-        System.out.println("Adicionando novo contato:");
-        System.out.print("ID: ");
-        Long id = scanner.nextLong();
-        scanner.nextLine(); // Limpa o buffer do scanner
-        System.out.print("Nome: ");
-        String nome = scanner.nextLine();
-        System.out.print("Sobrenome: ");
-        String sobrenome = scanner.nextLine();
-        System.out.print("DDD: ");
-        String ddd = scanner.nextLine();
-        System.out.print("Número: ");
-        String numero = scanner.nextLine();
-
-        Contato contato = new Contato(id, nome, sobrenome, Arrays.asList(new Telefone(id, ddd, numero)));
-        try {
-            agenda.adicionarContato(contato);
-            System.out.println("Contato adicionado com sucesso!");
-        } catch (Exception e) {
-            System.out.println("Erro ao adicionar contato: " + e.getMessage());
-        }
+        // Implementação para adicionar um contato
     }
 
     private void removerContato() {
-        System.out.print("Digite o ID do contato a ser removido: ");
-        Long id = scanner.nextLong();
-        scanner.nextLine(); // Limpa o buffer do scanner
-        try {
-            agenda.removerContato(id);
-            System.out.println("Contato removido com sucesso!");
-        } catch (Exception e) {
-            System.out.println("Erro ao remover contato: " + e.getMessage());
-        }
+        // Implementação para remover um contato
     }
 
     private void editarContato() {
-        // Lógica para editar um contato
-        // Similar ao método adicionarContato, mas buscando o contato pelo ID primeiro
+        // Implementação para editar um contato
     }
 
     private void listarContatos() {
-        List<Contato> contatos = agenda.listarContatos();
-        for (Contato contato : contatos) {
-            System.out.println("ID: " + contato.getId() + ", Nome: " + contato.getNome() + ", Sobrenome: " + contato.getSobreNome());
-            // Listar telefones do contato
-        }
+        // Implementação para listar todos os contatos
+    }
+
+    private void buscarContatoPorNome() {
+        // Implementação para buscar contatos por nome
     }
 
     public static void main(String[] args) {
