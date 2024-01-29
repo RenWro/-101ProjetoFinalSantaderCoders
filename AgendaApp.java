@@ -74,7 +74,24 @@ public class AgendaApp {
     }
 
     private void listarContatos() {
-        // Implementação para listar todos os contatos
+        List<Contato> contatos = agenda.listarContatos();
+        if (contatos.isEmpty()) {
+            System.out.println("Não há contatos na agenda.");
+        } else {
+            System.out.println("Lista de Contatos:");
+            for (Contato contato : contatos) {
+                System.out.println("\nID: " + contato.getId() + ", Nome: " + contato.getNome() + " " + contato.getSobreNome());
+                List<Telefone> telefones = contato.getTelefones();
+                if (telefones != null && !telefones.isEmpty()) {
+                    System.out.println("Telefones:");
+                    for (Telefone telefone : telefones) {
+                        System.out.println("\tID: " + telefone.getId() + ", DDD: " + telefone.getDdd() + ", Número: " + telefone.getNumero());
+                    }
+                } else {
+                    System.out.println("Sem telefones cadastrados.");
+                }
+            }
+        }
     }
 
     private void buscarContatoPorNome() {
