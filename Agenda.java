@@ -43,5 +43,4 @@ public class Agenda {
                        .collect(Collectors.toList());
     }
 
-    // Outros métodos conforme necessário...
 }
