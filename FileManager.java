@@ -6,49 +6,40 @@ public class FileManager {
     private static final String FILE_PATH = "agenda.txt";
 
     public void salvarContatos(List<Contato> contatos) {
-        try (FileWriter writer = new FileWriter(FILE_PATH);
-             BufferedWriter bw = new BufferedWriter(writer)) {
-
-            for (Contato contato : contatos) {
-                bw.write(contatoParaString(contato));
-                bw.newLine();
-            }
-        } catch (IOException e) {
-            System.err.format("IOException: %s%n", e);
-        }
+        // Lógica para escrever contatos no arquivo
     }
 
     public List<Contato> carregarContatos() {
-        List<Contato> contatos = new ArrayList<>();
-
-        try (FileReader reader = new FileReader(FILE_PATH);
-             BufferedReader br = new BufferedReader(reader)) {
-
-            String linha;
-            while ((linha = br.readLine()) != null) {
-                Contato contato = stringParaContato(linha);
-                if (contato != null) {
-                    contatos.add(contato);
-                }
-            }
-        } catch (IOException e) {
-            System.err.format("IOException: %s%n", e);
-        }
-
-        return contatos;
+        // Lógica para ler contatos do arquivo
     }
 
     private String contatoParaString(Contato contato) {
-        // Implementação para converter um contato em uma string
-        // Exemplo: "1,Carlos,Silva,11,999999999"
-        return "";
+        // Conversão de Contato para String
+        // Exemplo: "1,Carlos,Silva,11,99999-9999"
+        StringBuilder sb = new StringBuilder();
+        sb.append(contato.getId()).append(",");
+        sb.append(contato.getNome()).append(",");
+        sb.append(contato.getSobreNome());
+
+        for (Telefone telefone : contato.getTelefones()) {
+            sb.append(",").append(telefone.getDdd()).append(",").append(telefone.getNumero());
+        }
+
+        return sb.toString();
     }
 
     private Contato stringParaContato(String str) {
-        // Implementação para converter uma string em um contato
-        // Exemplo: "1,Carlos,Silva,11,999999999" -> Contato
-        return null;
-    }
+        // Conversão de String para Contato
+        String[] partes = str.split(",");
+        Long id = Long.parseLong(partes[0]);
+        String nome = partes[1];
+        String sobreNome = partes[2];
+        List<Telefone> telefones = new ArrayList<>();
 
-    // Outros métodos conforme necessário...
+        for (int i = 3; i < partes.length; i += 2) {
+            telefones.add(new Telefone(id, partes[i], partes[i + 1]));
+        }
+
+        return new Contato(id, nome, sobreNome, telefones);
+    }
 }
