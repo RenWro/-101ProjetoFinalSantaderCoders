@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Agenda {
     private List<Contato> contatos;
@@ -35,4 +36,12 @@ public class Agenda {
     public List<Contato> listarContatos() {
         return new ArrayList<>(contatos);
     }
+
+    public List<Contato> buscarContatoPorNome(String nome) {
+        return contatos.stream()
+                       .filter(contato -> contato.getNome().equalsIgnoreCase(nome))
+                       .collect(Collectors.toList());
+    }
+
+    // Outros métodos conforme necessário...
 }
